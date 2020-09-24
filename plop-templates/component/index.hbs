@@ -1,0 +1,24 @@
+{{#if template}}
+<template>
+  <div class="litchi-{{ flatName }}"></div>
+</template>
+{{/if}}
+
+{{#if script}}
+<script lang="ts">
+  /**
+  * @description {{ desc }}
+  */
+  import { defineComponent } from "vue";
+  import "../style/index.less";
+  export default defineComponent({
+    name: 'litchi{{ properCase name }}',
+  });
+</script>
+{{/if}}
+
+{{!-- {{#if style}}
+<style lang="scss" scoped>
+
+</style>
+{{/if}} --}}

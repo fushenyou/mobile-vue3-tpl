@@ -1,0 +1,23 @@
+{{#if template}}
+<template>
+  <div class="vw-{{ flatName }}"></div>
+</template>
+{{/if}}
+
+{{#if script}}
+<script>
+  /**
+  * @description {{ desc }}
+  */
+  import { defineComponent } from "vue";
+  import "./index.less";
+  export default defineComponent({
+  });
+</script>
+{{/if}}
+
+{{!-- 
+<style lang="scss" scoped>
+
+</style>
+{{/if}} --}}
