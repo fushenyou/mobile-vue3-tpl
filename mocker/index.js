@@ -20,7 +20,7 @@ const proxy = {
       });
     }
     res.send({
-      code: 200,
+      code: 201,
       msg: "错误信息",
       data: {
         ...Mock.mock({

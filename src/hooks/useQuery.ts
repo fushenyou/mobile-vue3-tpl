@@ -30,6 +30,10 @@ export type UseQueryResultType<R, M = any> = {
   records: M[];
   /** 是否有更多数据 */
   isMore: boolean;
+  /** 是否有错误信息 */
+  isError: boolean;
+  /** 下拉刷新loading */
+  refreshLoading: boolean;
 };
 
 export type RespDataType = {
@@ -43,7 +47,9 @@ export default function useQuery<R = RespDataType, M = any>(request: (params: an
   const result = reactive<UseQueryResultType<R, M>>({
     data: <R>{},
     error: null,
+    isError: false,
     loading: false,
+    refreshLoading: false,
     pagination: { page: 1, size: 10 },
     total: 0,
     params: {},
@@ -55,8 +61,10 @@ export default function useQuery<R = RespDataType, M = any>(request: (params: an
     reset: fn,
   });
 
-  const before = () => {
+  const before = (params: any) => {
     result.loading = true;
+    result.isError = false;
+    if (params.refresh) result.refreshLoading = true;
   };
 
   const after = async (_params: any, isLoad: boolean, respPromise: Promise<R>) => {
@@ -64,8 +72,8 @@ export default function useQuery<R = RespDataType, M = any>(request: (params: an
     result.data = <any>data;
     result.error = error;
     result.loading = false;
-
-    if (error) return;
+    result.refreshLoading = false;
+    if (error) return (result.isError = true);
     result.total = <any>data?.total;
     if (!isLoad) {
       result.records = <any>data?.records;
@@ -98,7 +106,7 @@ export default function useQuery<R = RespDataType, M = any>(request: (params: an
   const refresh = async () => {
     // result.params = {};
     result.pagination = { page: 1, size: 10 };
-    await awaitTo<R>(aop.invoke(request, { ...result.pagination, ...result.params }, false));
+    await awaitTo<R>(aop.invoke(request, { ...result.pagination, ...result.params, refresh: true }, false));
   };
 
   /**
@@ -123,5 +131,5 @@ export default function useQuery<R = RespDataType, M = any>(request: (params: an
   result.load = load;
   result.reset = reset;
 
-  return toRefs<UseQueryResultType<R>>(result as UseQueryResultType<R>);
+  return toRefs<UseQueryResultType<R, M>>(result as UseQueryResultType<R, M>);
 }

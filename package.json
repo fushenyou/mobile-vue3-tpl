@@ -30,6 +30,7 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0-0",
     "@vue/eslint-config-typescript": "^5.0.2",
+    "amfe-flexible": "^2.2.1",
     "babel-eslint": "^10.1.0",
     "babel-plugin-import": "^1.13.0",
     "eslint": "^6.7.2",
@@ -39,6 +40,7 @@
     "mocker-api": "^2.3.5",
     "mockjs": "^1.1.0",
     "plop": "^2.7.4",
+    "postcss-pxtorem": "^5.1.1",
     "typescript": "~3.9.3"
   },
   "eslintConfig": {
@@ -55,10 +57,5 @@
       "parser": "@typescript-eslint/parser"
     },
     "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+  }
 }

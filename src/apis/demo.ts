@@ -27,5 +27,5 @@ export type QueryDemoListParamsType = {
 };
 
 export async function queryDemoList(params: QueryDemoListParamsType): Promise<QueryDemoListResultType> {
-  return request("/queryDemoList", { method: "POST", params });
+  return request("/queryDemoList", { method: "POST", params, isLoading: false });
 }

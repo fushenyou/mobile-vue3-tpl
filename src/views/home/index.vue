@@ -20,6 +20,9 @@ export default defineComponent({
     [Icon.name]: Icon,
   },
   setup() {},
+  data() {
+    return { data: "" };
+  },
   methods: {
     hanldClick() {
       this.$router.push("/list");
